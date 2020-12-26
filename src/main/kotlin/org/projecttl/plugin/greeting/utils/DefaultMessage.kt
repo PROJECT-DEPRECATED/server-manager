@@ -10,6 +10,7 @@ class DefaultMessage(instance: GreetingPlugin) {
     }
 
     fun default() {
+        plugin?.getGreetingConfig()?.set("Greeting.PlayerNameColor", "§e")
         plugin?.getGreetingConfig()?.set("Greeting.JoinMessage", ">§a has Join this Server!")
         plugin?.getGreetingConfig()?.set("Greeting.QuitMessage", ">§c has Left this Server!")
     }

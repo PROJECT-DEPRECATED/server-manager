@@ -1,0 +1,17 @@
+name: Greeting_Plugin
+author: $author
+version: $version
+api-version: 1.16
+main: $main
+
+commands:
+  greeting:
+    description: This is main command.
+    usage: /greeting default
+    permission: plugin.greeting.op
+    permission-message: <Greeting_Plugin>§c You haven't op permission!
+
+permissions:
+  plugin.greeting.op:
+    description: This is main permission.
+    default: op

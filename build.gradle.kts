@@ -1,6 +1,7 @@
 plugins {
-    kotlin("jvm") version "1.4.31"
-    id("com.github.johnrengelman.shadow") version "6.1.0"
+    kotlin("jvm") version "1.5.30"
+    id("com.github.johnrengelman.shadow") version "7.0.0"
+
     `maven-publish`
 }
 
@@ -9,16 +10,17 @@ version = properties["version"]!!
 
 repositories {
     mavenCentral()
-    maven("https://papermc.io/repo/repository/maven-public/")
+    maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
+    maven("https://oss.sonatype.org/content/repositories/snapshots/")
 }
 
 dependencies {
     implementation(kotlin("stdlib"))
-    compileOnly("com.destroystokyo.paper:paper-api:1.12.2-R0.1-SNAPSHOT")
+    implementation("net.kyori:adventure-api:4.7.0")
+    implementation("org.xerial:sqlite-jdbc:3.36.0.2")
+    implementation("net.projecttl:InventoryGUI-api:4.1.2")
+    compileOnly("org.spigotmc:spigot-api:1.17.1-R0.1-SNAPSHOT")
 }
-
-val shade = configurations.create("shade")
-shade.extendsFrom(configurations.implementation.get())
 
 tasks {
     javadoc {
@@ -26,7 +28,7 @@ tasks {
     }
 
     compileKotlin {
-        kotlinOptions.jvmTarget = "1.8"
+        kotlinOptions.jvmTarget = "16"
     }
 
     create<Jar>("sourceJar") {
@@ -40,16 +42,9 @@ tasks {
         }
     }
 
-    jar {
-        from ( shade.map { if (it.isDirectory) it else zipTree(it) } )
-    }
-}
-
-publishing {
-    publications {
-        create<MavenPublication>("Greeting_Plugin") {
-            artifact(tasks["sourceJar"])
-            from(components["java"])
-        }
+    shadowJar {
+        archiveBaseName.set(rootProject.name)
+        archiveVersion.set("")
+        archiveClassifier.set("")
     }
 }

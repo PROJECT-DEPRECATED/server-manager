@@ -1,2 +1,1 @@
-rootProject.name = "Greeting_Plugin"
-
+rootProject.name = "server-manager"

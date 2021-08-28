@@ -1,0 +1,5 @@
+message:
+  firstJoin: "<gold>[<aqua>FIRST JOIN<gold>] <yellow><player>"
+  join: "<gold>[<green>JOIN<gold>] <yellow><player>"
+  quit: "<gold>[<red>QUIT<gold>] <yellow><player>"
+  dead: "<gold>[<dark_red>DEAD<gold>] <yellow><player>"
